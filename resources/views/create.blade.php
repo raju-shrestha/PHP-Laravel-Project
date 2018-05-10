@@ -27,7 +27,7 @@
 
                                 <label for="phone_no"> Phone</label>
 
-                                <input type="text" class="form-control" id="phone_no" name="roll_no"  value="{{old('phone_no')}}" placeholder="Phone No" required>
+                                <input type="text" class="form-control" id="phone_no" name="phone_no"  value="{{old('phone_no')}}" placeholder="Phone No" required>
                                 @if($errors->first('phone_no'))
                                     <div class="text-danger">{{$errors->first('phone_no')}}</div>
                                 @endif

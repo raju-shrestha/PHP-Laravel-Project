@@ -4,10 +4,16 @@ use App\Teacher;
 use Illuminate\Http\Request;
 class TeacherController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $teachers = Teacher::all();
-        return view('teacher.index',compact('teachers'));
+        return view('index',compact('teachers'));
     }
     /**
      * Show the form for creating a new resource.
@@ -16,7 +22,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create');
+        return view('create');
     }
     /**
      * Store a newly created resource in storage.
@@ -26,17 +32,8 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'phone_no' => 'required | unique:teacher',
-            'name' => 'required | string',
-        ]);
-        $input = $request->all();
-        $teacher = new  Teacher();
-        $teacher->teacher_id = $input['phone_no'];
-        $teacher->name = $input['name'];
-        $teacher->subject = $input['subject'];
-        $teacher->save();
-        return redirect('/teacher/index');
+        Teacher::create($request->all());
+        return Redirect('/teacher/index');
     }
     /**
      * Display the specified resource.
@@ -47,6 +44,8 @@ class TeacherController extends Controller
     public function show($id)
     {
         //
+
+        return view('show', ['teacher'=>Teacher::findOrFail($id)]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +56,7 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $teacher=Teacher::find($id);
-        return view('teacher.edit', compact('teacher','id'));
+        return view('edit', compact('teacher','id'));
     }
     /**
      * Update the specified resource in storage.

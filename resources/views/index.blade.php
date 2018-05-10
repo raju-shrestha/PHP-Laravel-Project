@@ -32,12 +32,12 @@
                                         <td>{{ $teacher->name }}</td>
                                         <td>{{ $teacher->phone_no }}</td>
 
-                                        <td><a href="{{action('TeacherController@edit', $teacher->id)}}" class="btn btn-warning"><i class="far fa-edit"></i></a></td>
+                                        <td><a href="{{action('TeacherController@edit', $teacher->id)}}" class="btn btn-warning"><i class="far fa-edit">Edit</i></a></td>
                                         <td>
                                             <form action="{{action('TeacherController@destroy', $teacher->id)}}" method="post">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
-                                                <button class="btn btn-danger" onclick="return confirm('Are you Sure?')" type="submit"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-danger" onclick="return confirm('Are you Sure?')" type="submit"><i class="far fa-trash-alt">Delete</i></button>
                                             </form>
                                         </td>
                                     </tr>
